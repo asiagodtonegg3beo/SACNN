@@ -132,7 +132,7 @@ def detect_face(img, Pnet16 ,Rnet24 ,Onet36 ):
     factor: the factor used to create a scaling pyramid of face sizes to detect in the image.
     """
     
-    '''
+
     return_flag = 0
     
     if(Pnet16 != None and Rnet24 == None and Onet36 == None):
@@ -141,7 +141,7 @@ def detect_face(img, Pnet16 ,Rnet24 ,Onet36 ):
         return_flag = 2
     elif(Pnet16 != None and Rnet24 != None and Onet36 != None):
         return_flag = 3
-    '''
+    
     
     # 影響face的生成數量，越高越少，使用哪個模型(Pnet,onet,rnet)就調整哪個
     threshold = [0.72,0.2,0.2]
