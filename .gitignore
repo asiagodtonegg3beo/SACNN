@@ -1,0 +1,11 @@
+create_data\old\
+create_data\ckpt\
+detection\test.mp4
+detection\test_720.mp4
+FDDB\ckpt\
+FDDB\data\
+FDDB\result_dir\
+train\ckpt\
+train\logs\
+train\old\
+widerface-test\
