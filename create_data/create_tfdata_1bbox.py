@@ -62,15 +62,15 @@ if __name__ == '__main__':
   
   examples = []
   pos_path = 'face{}/pos_{}.txt'.format(net_size, net_size)
-  pos_path2 = 'face{}/pos_hard_example{}.txt'.format(net_size, net_size)#
+  #pos_path2 = 'face{}/pos_hard_example{}.txt'.format(net_size, net_size)#
   part_path = 'face{}/part_{}.txt'.format(net_size, net_size)
   neg_path = 'face{}/neg_{}.txt'.format(net_size, net_size)  
-  neg_path2 = 'face{}/neg_hard_example{}.txt'.format(net_size, net_size) # 
+  #neg_path2 = 'face{}/neg_hard_example{}.txt'.format(net_size, net_size) # 
   examples.extend(get_network_examples(pos_path, net_size, data_flag = 1))
-  examples.extend(get_network_examples(pos_path2, net_size, data_flag = 1)) #
+  #examples.extend(get_network_examples(pos_path2, net_size, data_flag = 1)) #
   examples.extend(get_network_examples(part_path, net_size, data_flag = 1))
   examples.extend(get_network_examples(neg_path, net_size, data_flag = 0))
-  examples.extend(get_network_examples(neg_path2, net_size, data_flag = 0))  #
+  #examples.extend(get_network_examples(neg_path2, net_size, data_flag = 0))  #
   #print('len', len(examples))
   
 

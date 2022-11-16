@@ -132,18 +132,9 @@ def detect_face(img, Pnet16 ,Rnet24 ,Onet36 ):
     factor: the factor used to create a scaling pyramid of face sizes to detect in the image.
     """
     
-
-    return_flag = 0
+    print(Pnet16,Rnet24,Onet36)
     
-    if(Pnet16 != None and Rnet24 == None and Onet36 == None):
-        return_flag = 1
-    elif(Pnet16 != None and Rnet24 != None and Onet36 == None):
-        return_flag = 2
-    elif(Pnet16 != None and Rnet24 != None and Onet36 != None):
-        return_flag = 3
-    
-    
-    # 影響face的生成數量，越高越少，使用哪個模型(Pnet,onet,rnet)就調整哪個
+    # 影響 FP 的生成數量，threshold越高，FP越少，使用哪個模型(Pnet,onet,rnet)就調整哪個
     threshold = [0.72,0.2,0.2]
     #factor = 0.79    
     factor = 0.709 ##初步測試期間減少圖像金字塔的密度，用以加快運算速度
@@ -220,7 +211,9 @@ def detect_face(img, Pnet16 ,Rnet24 ,Onet36 ):
         total_boxes[:,0:4] = np.fix(total_boxes[:,0:4]).astype(np.int32)
         dy, edy, dx, edx, y, ey, x, ex, tmpw, tmph = pad(total_boxes.copy(), w, h)
         
-    return total_boxes
+    if Pnet16 and Rnet24 is None and Onet36 is None:
+        print('return Pnet')
+        return total_boxes
     numbox = total_boxes.shape[0]
  
     if numbox>0:
@@ -271,9 +264,13 @@ def detect_face(img, Pnet16 ,Rnet24 ,Onet36 ):
             total_boxes = rerec(total_boxes.copy())
           
               
-    numbox = total_boxes.shape[0]    
-    #return rnet_result 只取Rnet資料，拿掉return total_boxes的註解     
-    #return total_boxes
+    numbox = total_boxes.shape[0]  
+    
+    #return rnet_result 只取Rnet資料，拿掉return total_boxes的註解
+    
+    if Pnet16 and Rnet24 and Onet36 is None:   
+        print('return Rnet')
+        return total_boxes
     
     if numbox>0:
         total_boxes = np.fix(total_boxes).astype(np.int32)
@@ -321,7 +318,8 @@ def detect_face(img, Pnet16 ,Rnet24 ,Onet36 ):
             total_boxes = bbreg(total_boxes.copy(), np.transpose(mv))
             pick = nms(total_boxes.copy(), 0.7, 'Min')
             total_boxes = total_boxes[pick,:]
-                      
+               
+    print('return Onet')
     return total_boxes
       
     

@@ -20,14 +20,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-size",help='input the generate face size ex: python gen_data.py -size 16')
 args = parser.parse_args()
 args.size = int(args.size)
-if args.size not in [12, 16, 20 ,36, 48 , 64]:
+if args.size not in [12, 16, 20, 24, 36, 48, 64]:
    print('Error! Invalid size: {}'.format(args.size))
    sys.exit(1)  
 net_size = args.size
 
 #face的id對應label的txt
 #anno_file='wider_face_train_filtered.txt'
-anno_file='val_11520.txt' # 改
+anno_file='train.txt' # 改
 #圖片路徑
 #im_dir='../../dataset/WIDER_train/images/'
 im_dir = 'D:/SACNN/widerface-test/dataset/WIDER_train/images/'
